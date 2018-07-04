@@ -23,8 +23,6 @@ func DashboardPostHandler() echo.HandlerFunc {
 		IGJsonData, _, err := helpers.GetIGJsonData("https://www.instagram.com/"+userIG, "GoogleBot")
 
 		log.Print(err)
-		log.Print("@@@@@@@@@@@@@@")
-		log.Print(IGJsonData.EntryData.ProfilePage[0].Graphql.User.FullName)
 
 		totalLike := 0
 		totalComment := 0
@@ -32,6 +30,12 @@ func DashboardPostHandler() echo.HandlerFunc {
 			totalLike += media.Node.EdgeLikedBy.Count
 			totalComment += media.Node.EdgeMediaToComment.Count
 		}
+
+		var engagementRate float64
+		engagement := 0
+		followers := IGJsonData.EntryData.ProfilePage[0].Graphql.User.EdgeFollowedBy.Count
+		engagement = (totalComment + totalLike)
+		engagementRate = ((float64(engagement) / float64(followers)) * 100) / 10
 
 		data := map[string]interface{}{}
 		data["userData"] = IGJsonData.EntryData.ProfilePage[0].Graphql.User
@@ -44,6 +48,7 @@ func DashboardPostHandler() echo.HandlerFunc {
 		}
 		data["totalLike"] = totalLike
 		data["totalComment"] = totalComment
+		data["engagementRate"] = int(engagementRate)
 
 		return RenderTemplate(c, "dashboard/index", data)
 	}
