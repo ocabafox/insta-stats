@@ -1,0 +1,187 @@
+{{define "content"}}
+<div class="row" id="dashboard">
+  <section class="text-center py-4">
+    <h1 class="h1 font-weight-bold text-center mb-3 pt-4">InstaAnalytics</h1>
+    <p class="text-center mb-5 pb-3">Engagement rate for the 12 latest instagram medias and also enables Instagram Analytics, Social Media Analytics, Social Media Marketing and Social Media Measurement.</p>
+    
+      <form method="POST" action="/" id="searchForm">
+        {{if .csrf_token}}
+        <input type="hidden" name="csrf_token" value="{{.csrf_token}}" /> {{end}}
+        <input type="text" name="search" class="form-control form-control-lg text-center">
+      </form>
+    
+  </section>
+
+  {{template "partials_engagement" .}}
+
+  {{if eq .hasMedia false}}
+  <section>
+    <!-- Card deck -->
+    <div class="card-deck">
+
+      <!-- Card -->
+      <div class="card">
+        <!--Card image-->
+        <div class="view overlay">
+          <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg" alt="Card image cap">
+          <a href="#!">
+            <div class="mask rgba-white-slight"></div>
+          </a>
+        </div>
+        <!--Card content-->
+        <div class="card-body">
+          <!--Title-->
+          <h4 class="card-title">My Bike</h4>
+          <!--Text-->
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+        </div>
+        <!-- Card footer -->
+        <div class="rounded-bottom mdb-color lighten-3 text-center pt-3">
+          <ul class="list-unstyled list-inline font-small">
+            <li class="list-inline-item pr-2 white-text">
+              <i class="fa fa-clock-o pr-1"></i>05/10/2015</li>
+            <li class="list-inline-item pr-2">
+              <a href="#" class="white-text">
+                <i class="fa fa-comments-o pr-1"></i>12</a>
+            </li>
+            <li class="list-inline-item pr-2">
+              <a href="#" class="white-text">
+                <i class="fa fa-facebook pr-1"> </i>21</a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#" class="white-text">
+                <i class="fa fa-twitter pr-1"> </i>5</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Card -->
+
+      <!-- Card -->
+      <div class="card">
+        <!--Card image-->
+        <div class="view overlay">
+          <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/14.jpg" alt="Card image cap">
+          <a href="#!">
+            <div class="mask rgba-white-slight"></div>
+          </a>
+        </div>
+        <!--Card content-->
+        <div class="card-body">
+          <!--Title-->
+          <h4 class="card-title">Red Car</h4>
+          <!--Text-->
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+        </div>
+        <!-- Card footer -->
+        <div class="rounded-bottom mdb-color lighten-3 text-center pt-3">
+          <ul class="list-unstyled list-inline font-small">
+            <li class="list-inline-item pr-2 white-text">
+              <i class="fa fa-clock-o pr-1"></i>05/10/2015</li>
+            <li class="list-inline-item pr-2">
+              <a href="#" class="white-text">
+                <i class="fa fa-comments-o pr-1"></i>12</a>
+            </li>
+            <li class="list-inline-item pr-2">
+              <a href="#" class="white-text">
+                <i class="fa fa-facebook pr-1"> </i>21</a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#" class="white-text">
+                <i class="fa fa-twitter pr-1"> </i>5</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Card -->
+
+      <!-- Card -->
+      <div class="card">
+        <!--Card image-->
+        <div class="view overlay">
+          <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/15.jpg" alt="Card image cap">
+          <a href="#!">
+            <div class="mask rgba-white-slight"></div>
+          </a>
+        </div>
+        <!--Card content-->
+        <div class="card-body">
+          <!--Title-->
+          <h4 class="card-title">No Traffic</h4>
+          <!--Text-->
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+        </div>
+        <!-- Card footer -->
+        <div class="rounded-bottom mdb-color lighten-3 text-center pt-3">
+          <ul class="list-unstyled list-inline font-small">
+            <li class="list-inline-item pr-2 white-text">
+              <i class="fa fa-clock-o pr-1"></i>05/10/2015</li>
+            <li class="list-inline-item pr-2">
+              <a href="#" class="white-text">
+                <i class="fa fa-comments-o pr-1"></i>12</a>
+            </li>
+            <li class="list-inline-item pr-2">
+              <a href="#" class="white-text">
+                <i class="fa fa-facebook pr-1"> </i>21</a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#" class="white-text">
+                <i class="fa fa-twitter pr-1"> </i>5</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Card -->
+
+    </div>
+    <!-- Card deck -->
+  </section>
+  {{else}}
+  <section>
+    <div class="row">
+      {{range .media}}
+      <div class="col-4 mt-4">
+        <!-- Card -->
+        <div class="card">
+          <!--Card image-->
+          <div class="view overlay">
+            <img class="card-img-top" src={{.Node.DisplayURL}} alt="Card image cap">
+            <a href="#!">
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+          <!--Card content-->
+          <div class="card-body">
+            <!--Text-->
+            {{range .Node.EdgeMediaToCaption.Edges}}
+            <p class="card-text">{{.Node.Text}}</p>
+            {{end}}
+            <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+          </div>
+          <!-- Card footer -->
+          <div class="rounded-bottom mdb-color lighten-3 text-center pt-3">
+            <ul class="list-unstyled list-inline font-small">
+              <li class="list-inline-item pr-2 white-text">
+                <i class="fa fa-clock-o pr-1"></i>{{.Node.TakenAtTimestamp | unixToDatetime}}</li>
+              <li class="list-inline-item pr-2">
+                <a href="#" class="white-text">
+                  <i class="fa fa-comments-o pr-1"></i>{{.Node.EdgeMediaToComment.Count}}</a>
+              </li>
+              <li class="list-inline-item pr-2">
+                <a href="#" class="white-text">
+                  <i class="fa fa-heart pr-1"> </i>{{.Node.EdgeLikedBy.Count}}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- Card -->
+      </div>
+      {{end}}
+    </div>
+  </section>
+  {{end}}
+</div>
+{{end}}

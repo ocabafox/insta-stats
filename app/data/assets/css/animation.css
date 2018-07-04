@@ -1,0 +1,38 @@
+.loading {
+  position: absolute;
+  left: 40%;
+  top: 30%;
+  margin: -60px 0 0 -60px;
+  background: #fff;
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+  border: 10px solid #009588;
+}
+.loading:after {
+  content: '';
+  background: trasparent;
+  width: 140%;
+  height: 140%;
+  position: absolute;
+  border-radius: 100%;
+  top: -20%;
+  left: -20%;
+  opacity: 0.7;
+  box-shadow: #009688 -4px -5px 3px -3px;
+  animation: rotate 2s infinite linear;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+.loading > h1 {
+  font-size: 4.5rem;
+  line-height: 2.5;
+}
